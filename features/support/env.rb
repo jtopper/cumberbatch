@@ -26,9 +26,11 @@ end
 
 # Here be assumptions!
 # Expecting to find a "puppet" directory in the path with the Vagrantfile and
-#  Rakefile.
+#  Rakefile (unless specified otherwise in the environment)
 # Expecting to find directories under there which contain 'modules' and 'manifests'
 #  directories.
 
-$puppet_modulepath   = glob_to_vagrant_puppet_path( 'puppet/*/modules' )
-$puppet_manifestdir  = glob_to_vagrant_puppet_path( 'puppet/*/manifests' )
+ENV['PUPPET_PATH'] ||= 'puppet'
+
+$puppet_modulepath   = glob_to_vagrant_puppet_path( "#{ENV['PUPPET_PATH']}/*/modules" )
+$puppet_manifestdir  = glob_to_vagrant_puppet_path( "#{ENV['PUPPET_PATH']}/*/manifests" )

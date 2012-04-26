@@ -2,9 +2,11 @@ require 'rubygems'
 require 'cucumber'
 require 'cucumber/rake/task'
 
+ENV['PUPPET_PATH'] ||= 'puppet'
+
 def all_features
     features = [ 'features/' ]
-    features << Dir.glob('puppet/**/*.feature') 
+    features << Dir.glob("#{ENV['PUPPET_PATH']}/**/*.feature") 
     features
 end
 
