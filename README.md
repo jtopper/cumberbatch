@@ -19,6 +19,10 @@ To try this out, you will need the following prerequisites installed:
 
 once you have these installed, run
 
+    vagrant up
+
+to start the base VM for the first time, then
+
     rake test
 
 to see the tool in action against an example set of puppet manifests and the standard `lucid32` Vagrant box.
