@@ -30,7 +30,8 @@ end
 # Expecting to find directories under there which contain 'modules' and 'manifests'
 #  directories.
 
-ENV['PUPPET_PATH'] ||= 'puppet'
+ENV['CUMBERBATCH_CONFIG'] ||= 'default.yml'
+config = Cumberbatch::Config.new( ENV['CUMBERBATCH_CONFIG'] )
 
-$puppet_modulepath   = glob_to_vagrant_puppet_path( "#{ENV['PUPPET_PATH']}/*/modules" )
-$puppet_manifestdir  = glob_to_vagrant_puppet_path( "#{ENV['PUPPET_PATH']}/*/manifests" )
+$puppet_modulepath   = glob_to_vagrant_puppet_path( "#{ config.puppet_path }/*/modules" )
+$puppet_manifestdir  = glob_to_vagrant_puppet_path( "#{ config.puppet_path }/*/manifests" )

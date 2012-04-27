@@ -1,0 +1,9 @@
+puppet_path:     puppet
+vms:
+    server:
+        box:             lucid32
+        box_url:         'http://files.vagrantup.com/lucid32.box'
+        box_ram:         1024
+        freeman_port:    9000
+        provision:      'adduser --system --group puppet'
+

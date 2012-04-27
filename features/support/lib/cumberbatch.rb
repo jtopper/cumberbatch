@@ -5,6 +5,7 @@ module Cumberbatch
     autoload :Platform, 'cumberbatch/platform'
     autoload :Guest,    'cumberbatch/guest'
     autoload :Registry, 'cumberbatch/registry'
+    autoload :Config,   'cumberbatch/config'
 
     def vm_platform
         platform = :vagrant
