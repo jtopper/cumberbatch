@@ -15,17 +15,19 @@ module Cumberbatch
         end
 
         def vm_names
-
-            if @yaml['vms'].nil?
-                return []
-            end
-
+            [] if @yaml['vms'].nil?
             @yaml[ 'vms' ].each_key
         end
 
         def vm_details_by_name( name )
             @yaml['vms'][ name ]
         end
+
+        def cucumber_tags
+            [] if @yaml['tags'].nil?
+            @yaml['tags']
+        end
+
 
     end
 
