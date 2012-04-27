@@ -1,3 +1,5 @@
+$:.push( File.dirname(__FILE__) ) 
+
 VMRE ||= /(?: on the last VM| on the VM(?: called|) "(?:[^"]+)"|)/
 
 module Cumberbatch
