@@ -43,7 +43,7 @@ You can test your own manifests against your own Vagrant boxes fairly easily.  Y
 
 Alternatively, create your own `.yml` file anywhere under the `cumberbatch` directory base.  The `Rakefile` will hunt for files matching `**/*.yml` and dynamically build a namespace and set of standard tasks for each.  I use this with a git submodule to make testing manifests against multiple types of Vagrant box more straightforward.  My directory layout looks like this:
 
-{code}
+```
 cumberbatch/
 ├── README.md
 ├── Rakefile
@@ -59,11 +59,11 @@ cumberbatch/
     ├── centos6-vagrant-box.yml
     ├── puppet                        <-- Contains my manifests
     └── ubuntu10.04-vagrant-box.yml
-{code}
+```
 
 ...and a run of `rake -T` shows:
 
-{code}
+```
 rake centos6-vagrant-box:cleanup               # Clean up for 'centos6-vagrant-box' config
 rake centos6-vagrant-box:current               # Run Cucumber @current features with 'centos6-vagrant-box' config
 rake centos6-vagrant-box:default               # Run all Cucumber features with 'centos6-vagrant-box' config
@@ -77,7 +77,7 @@ rake ubuntu10.04-vagrant-box:cleanup           # Clean up for 'ubuntu10.04-vagra
 rake ubuntu10.04-vagrant-box:current           # Run Cucumber @current features with 'ubuntu10.04-vagrant-box' config
 rake ubuntu10.04-vagrant-box:default           # Run all Cucumber features with 'ubuntu10.04-vagrant-box' config
 rake ubuntu10.04-vagrant-box:vagrant[command]  # Run vagrant commands with namespace-appropriate config
-{code}
+```
 
 
 ## Next steps
