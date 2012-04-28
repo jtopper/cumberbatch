@@ -49,6 +49,10 @@ def run_cucumber( options = {} )
 
 end
 
+desc "Test task (invokes default:default)"
+task :test ['default:default'] do
+end
+
 target_yml_configs = Dir.glob("**/*.yml")
 
 target_yml_configs.each do |yml_file|
