@@ -37,6 +37,49 @@ The step definitions under `features/step_definitions/` use the Cumberbatch supp
 
 To support more advanced testing, Cumberbatch starts an XML-RPC daemon called `freeman` inside the VM.  This provides a good way to invoke fragments of Ruby inside the VM during testing for easier manipulation of the tested guest.  The features under the `mysql` puppet module are a good example of the use of this approach.
 
+## How do I test my own stuff?
+
+You can test your own manifests against your own Vagrant boxes fairly easily.  You can edit `default.yml` to reference a different Vagrant box and path to your own puppet manifests (this should be specified relative to the cumberbatch directory).
+
+Alternatively, create your own `.yml` file anywhere under the `cumberbatch` directory base.  The `Rakefile` will hunt for files matching `**/*.yml` and dynamically build a namespace and set of standard tasks for each.  I use this with a git submodule to make testing manifests against multiple types of Vagrant box more straightforward.  My directory layout looks like this:
+
+{code}
+cumberbatch/
+├── README.md
+├── Rakefile
+├── Vagrantfile
+├── default.yml
+├── features
+│   ├── step_definitions
+│   └── support
+├── freemand.rb
+├── puppet
+│   └── example-manifests
+└── puppet-with-cukes                 <-- Submodule
+    ├── centos6-vagrant-box.yml
+    ├── puppet                        <-- Contains my manifests
+    └── ubuntu10.04-vagrant-box.yml
+{code}
+
+...and a run of `rake -T` shows:
+
+{code}
+rake centos6-vagrant-box:cleanup               # Clean up for 'centos6-vagrant-box' config
+rake centos6-vagrant-box:current               # Run Cucumber @current features with 'centos6-vagrant-box' config
+rake centos6-vagrant-box:default               # Run all Cucumber features with 'centos6-vagrant-box' config
+rake centos6-vagrant-box:vagrant[command]      # Run vagrant commands with namespace-appropriate config
+rake default:cleanup                           # Clean up for 'default' config
+rake default:current                           # Run Cucumber @current features with 'default' config
+rake default:default                           # Run all Cucumber features with 'default' config
+rake default:vagrant[command]                  # Run vagrant commands with namespace-appropriate config
+rake test                                      # Run default:default
+rake ubuntu10.04-vagrant-box:cleanup           # Clean up for 'ubuntu10.04-vagrant-box' config
+rake ubuntu10.04-vagrant-box:current           # Run Cucumber @current features with 'ubuntu10.04-vagrant-box' config
+rake ubuntu10.04-vagrant-box:default           # Run all Cucumber features with 'ubuntu10.04-vagrant-box' config
+rake ubuntu10.04-vagrant-box:vagrant[command]  # Run vagrant commands with namespace-appropriate config
+{code}
+
+
 ## Next steps
 
 The step definitions all support multi-vm operation, and can be used to build tests against client/server VM pairs.  At present no example of this is provided - VirtualBox is unstable on the Mac when running multiple VMs.
