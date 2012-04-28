@@ -36,8 +36,10 @@ def run_cucumber( options = {} )
         cucumber_opts.concat( tags )
     end
 
-    cucumber_opts.concat( [ '--tags' ] )
-    cucumber_opts.concat( config.cucumber_tags )
+    if ! config.cucumber_tags.nil?
+        cucumber_opts.concat( [ '--tags' ] )
+        cucumber_opts.concat( config.cucumber_tags )
+    end
 
     if dry_run
         cucumber_opts.push('--dry-run')
@@ -49,9 +51,10 @@ def run_cucumber( options = {} )
 
 end
 
-desc "Test task (invokes default:default)"
-task :test ['default:default'] do
-end
+task :default => 'test'
+
+desc "Run default:default"
+task :test    => 'default:default'
 
 target_yml_configs = Dir.glob("**/*.yml")
 
